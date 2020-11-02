@@ -1,0 +1,96 @@
+<app-loginheader></app-loginheader>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mydata of data[0]; let i = index">
+        <td>{{mydata.id}}</td>
+        <td>{{mydata.firstname}}</td>
+        <td>{{mydata.password}}</td>
+        <td>{{mydata.email}}</td>
+        <td>{{mydata.mobile}}</td>
+    <td><button class="btn btn-danger" (click)="editModal(i, mydata.id)">Edit</button></td>
+    <td><button class="btn btn-danger" (click)="deleteuser(mydata.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal" id="editModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <h4 class="modal-title align-center">Edit : {{currentUser?.firstname}}</h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="closeEditModal()">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+        
+          <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+               <div class="col-sm-6">
+              
+               
+                  <div class="form-group">
+                        <label>firstname</label>
+                        <input type="text"  formControlName="firstname" class="form-control" />
+                        <!-- <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                              <div *ngIf="f.firstname.errors.required">Name is required</div>
+                        </div> -->
+                     </div>
+               </div>
+               <div class="col-sm-6">
+                <div class="form-group">
+                   <label>Password</label>
+                   <input type="text"  formControlName="password" class="form-control"  />
+                   <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">password is required</div>
+                      <div *ngIf="f.password.errors.password">password must be a valid password</div>
+                   </div> -->
+                </div>
+             </div> 
+               <div class="col-sm-6">
+                  <div class="form-group">
+                     <label>Email</label>
+                     <input type="text"  formControlName="email" class="form-control"  />
+                     <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                     </div> -->
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                <div class="form-group">
+                   <label>Mobile</label>
+                   <input type="text"  formControlName="mobile" class="form-control"  />
+                   <!-- <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                      <div *ngIf="f.mobile.errors.required">Email is required</div>
+                      <div *ngIf="f.mobile.errors.mobile">mobile must be a valid mobile</div>
+                   </div> -->
+                </div>
+             </div>
+               
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
